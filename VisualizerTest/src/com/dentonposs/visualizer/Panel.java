@@ -43,22 +43,20 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		setFocusable(true);
 		Display localDisplay = ((WindowManager) paramContext
 				.getSystemService("window")).getDefaultDisplay();
-		Point localPoint = new Point();
-		localDisplay.getSize(localPoint);
-		this.width = localPoint.x;
-		this.height = localPoint.y;
+		width = localDisplay.getWidth();
+		height = localDisplay.getHeight();
 		
 		multiplier_i = Integer.parseInt(SongPickActivity.multiplier.getText().toString());
 		spacing_i = Integer.parseInt(SongPickActivity.spacing.getText().toString());
 		lineWidth_i = Integer.parseInt(SongPickActivity.lineWidth.getText().toString());
 		
-		this.waveDataByte = new byte[this.width / spacing_i];
+		this.waveDataByte = new byte[spacing_i];
 		player = MediaPlayer.create(getContext(), SongPickActivity.songURI);
 		player.start();
 		this.paint.setColor(-1);
 		this.paint.setStrokeWidth(lineWidth_i);
 		this.vis = new Visualizer(player.getAudioSessionId());
-		this.vis.setCaptureSize(this.width / spacing_i);
+		this.vis.setCaptureSize(spacing_i);
 		this.vis.setEnabled(true);
 		if(spacing_i == 0){
 			spacing_i++;
@@ -77,14 +75,16 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	public void onDraw(Canvas paramCanvas) {
 		paramCanvas.drawColor(-16777216);
 		this.vis.getFft(this.waveDataByte);
-		for (int i = 0;; i++) {
-			if (i >= this.waveDataByte.length)
-				return;
+		for (int i = 0; i < waveDataByte.length; i++) {
 			this.paint.setColor(colorFromARGB(255, 255 - i % 255, 0, i % 255));
-			paramCanvas.drawLine(i * spacing_i, this.height, i * spacing_i,
-					this.height - Math.abs(multiplier_i * this.waveDataByte[i]),
+			paramCanvas.drawLine(i * (width / spacing_i), height - height / 2, i * (width / spacing_i),
+					(this.height / 2) - Math.abs(multiplier_i * this.waveDataByte[i]),
+					this.paint);
+			paramCanvas.drawLine(i * width / spacing_i, height - height / 2, i * (width / spacing_i),
+					(this.height / 2) + Math.abs(multiplier_i * this.waveDataByte[i]),
 					this.paint);
 		}
+		
 	}
 	
 	public static void pauseSong(){

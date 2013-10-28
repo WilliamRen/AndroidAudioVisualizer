@@ -32,7 +32,7 @@
         android1:layout_height="wrap_content"
         android1:layout_alignParentLeft="true"
         android1:layout_below="@+id/multiplier"
-        android:hint="Bar Spacing"
+        android:hint="Amount of Bars"
         android1:ems="10"
         android1:inputType="number" />
 
