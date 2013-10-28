@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.dentonposs.visualizer.Panel
+        android:id="@+id/SurfaceView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </com.dentonposs.visualizer.Panel>
+
+</FrameLayout>
