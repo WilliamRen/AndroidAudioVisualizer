@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
@@ -25,6 +26,10 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private byte[] waveDataByte;
 	int width;
 
+	int multiplier_i;
+	int spacing_i;
+	int lineWidth_i;
+	
 	public Panel(Context paramContext) {
 		super(paramContext);
 		getHolder().addCallback(this);
@@ -42,14 +47,22 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		localDisplay.getSize(localPoint);
 		this.width = localPoint.x;
 		this.height = localPoint.y;
-		this.waveDataByte = new byte[this.width / 5];
+		
+		multiplier_i = Integer.parseInt(SongPickActivity.multiplier.getText().toString());
+		spacing_i = Integer.parseInt(SongPickActivity.spacing.getText().toString());
+		lineWidth_i = Integer.parseInt(SongPickActivity.lineWidth.getText().toString());
+		
+		this.waveDataByte = new byte[this.width / spacing_i];
 		player = MediaPlayer.create(getContext(), SongPickActivity.songURI);
 		player.start();
 		this.paint.setColor(-1);
-		this.paint.setStrokeWidth(2.0F);
+		this.paint.setStrokeWidth(lineWidth_i);
 		this.vis = new Visualizer(player.getAudioSessionId());
-		this.vis.setCaptureSize(this.width / 5);
+		this.vis.setCaptureSize(this.width / spacing_i);
 		this.vis.setEnabled(true);
+		if(spacing_i == 0){
+			spacing_i++;
+		}
 	}
 
 	private int colorFromARGB(int paramInt1, int paramInt2, int paramInt3,
@@ -68,10 +81,18 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 			if (i >= this.waveDataByte.length)
 				return;
 			this.paint.setColor(colorFromARGB(255, 255 - i % 255, 0, i % 255));
-			paramCanvas.drawLine(i * 5, this.height, i * 5,
-					this.height - Math.abs(5 * this.waveDataByte[i]),
+			paramCanvas.drawLine(i * spacing_i, this.height, i * spacing_i,
+					this.height - Math.abs(multiplier_i * this.waveDataByte[i]),
 					this.paint);
 		}
+	}
+	
+	public static void pauseSong(){
+		player.pause();
+	}
+	
+	public static void playSong(){
+		player.start();
 	}
 
 	public void surfaceChanged(SurfaceHolder paramSurfaceHolder, int paramInt1,

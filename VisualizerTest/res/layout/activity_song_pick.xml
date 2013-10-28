@@ -10,7 +10,40 @@
         android1:layout_height="wrap_content"
         android1:layout_alignParentLeft="true"
         android1:layout_alignParentTop="true"
-        android1:text="@string/song" 
-        android:onClick="runVisualizer"/>
+        android:onClick="runVisualizer"
+        android1:text="@string/song" />
+
+    <EditText
+        android1:id="@+id/multiplier"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_below="@+id/button1"
+        android:hint="Multiplier"
+        android1:ems="10"
+        android1:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android1:id="@+id/spacing"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_below="@+id/multiplier"
+        android:hint="Bar Spacing"
+        android1:ems="10"
+        android1:inputType="number" />
+
+    <EditText
+        android1:id="@+id/width"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_below="@+id/spacing"
+        android:hint="Bar Width"
+        android1:ems="10"
+        android1:inputType="number" />
 
 </RelativeLayout>
