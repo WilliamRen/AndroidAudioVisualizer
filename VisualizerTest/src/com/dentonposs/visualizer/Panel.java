@@ -1,6 +1,5 @@
 package com.dentonposs.visualizer;
 
-import java.nio.ByteBuffer;
 import java.util.Random;
 
 import android.annotation.SuppressLint;
@@ -29,6 +28,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
     int multiplier_i;
     int spacing_i;
     int lineWidth_i;
+    
+    float spacing_px;
 
     public Panel(Context paramContext) {
 	super(paramContext);
@@ -63,24 +64,26 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	player.start();
 	this.paint.setColor(-1);
 	this.paint.setStrokeWidth(lineWidth_i);
-	this.vis = new Visualizer(player.getAudioSessionId());
-	this.vis.setCaptureSize(spacing_i);
-	this.vis.setEnabled(true);
 	if (spacing_i == 0) {
 	    spacing_i++;
 	}
+	this.vis = new Visualizer(player.getAudioSessionId());
+	this.vis.setCaptureSize(spacing_i);
+	this.vis.setEnabled(true);
+	spacing_px = width / spacing_i;
     }
 
-    private int colorFromARGB(int paramInt1, int paramInt2, int paramInt3, int paramInt4) {
-	return paramInt4 | (paramInt1 << 24 | paramInt2 << 16 | paramInt3 << 8);
-    }
+    // private int colorFromARGB(int paramInt1, int paramInt2, int paramInt3,
+    // int paramInt4) {
+    // return paramInt4 | (paramInt1 << 24 | paramInt2 << 16 | paramInt3 << 8);
+    // }
 
     public void onDraw(Canvas paramCanvas) {
 	paramCanvas.drawColor(-16777216);
 	this.vis.getFft(this.waveDataByte);
 	for (int i = 0; i < waveDataByte.length; i++) {
-	    paramCanvas.drawLine(i * (width / spacing_i), height / 2, i * (width / spacing_i), (this.height / 2) - Math.abs(multiplier_i * this.waveDataByte[i]), this.paint);
-	    paramCanvas.drawLine(i * (width / spacing_i), height / 2, i * (width / spacing_i), (this.height / 2) + Math.abs(multiplier_i * this.waveDataByte[i]), this.paint);
+	    paramCanvas.drawLine(i * spacing_px, height / 2, i * (width / spacing_i), (this.height / 2) - Math.abs(multiplier_i * this.waveDataByte[i]), this.paint);
+	    paramCanvas.drawLine(i * spacing_px, height / 2, i * (width / spacing_i), (this.height / 2) + Math.abs(multiplier_i * this.waveDataByte[i]), this.paint);
 	}
 
     }

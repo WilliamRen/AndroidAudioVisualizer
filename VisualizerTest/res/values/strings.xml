@@ -5,7 +5,7 @@
     <string name="title_activity_main">Audio Visualizer</string>
     <string name="song">Pick a song</string>
     <string name="multiplier">Multiplier</string>
-    <string name="barnum">Number of Bars</string>
+    <string name="barnum">Number of Bars, cannot be greater than </string>
     <string name="barwidth">Width of Bars</string>
 
 </resources>

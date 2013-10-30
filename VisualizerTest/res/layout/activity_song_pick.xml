@@ -27,16 +27,6 @@
     </EditText>
 
     <EditText
-        android1:id="@+id/width"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_below="@+id/spacing"
-        android1:layout_toRightOf="@+id/button1"
-        android1:ems="10"
-        android1:hint="@string/barwidth"
-        android1:inputType="number" />
-
-    <EditText
         android1:id="@+id/multiplier"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
@@ -67,7 +57,17 @@
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
         android1:layout_alignParentLeft="true"
-        android1:layout_alignTop="@+id/width"
+        android1:layout_below="@+id/textView2"
         android1:text="@string/barwidth" />
+
+    <EditText
+        android1:id="@+id/width"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignLeft="@+id/spacing"
+        android1:layout_below="@+id/spacing"
+        android1:ems="10"
+        android1:hint="@string/barwidth"
+        android1:inputType="number" />
 
 </RelativeLayout>
