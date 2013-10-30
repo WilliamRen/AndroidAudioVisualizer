@@ -27,7 +27,7 @@ public class SongPickActivity extends Activity {
 		multiplier = (EditText) findViewById(R.id.multiplier);
 		spacing = (EditText) findViewById(R.id.spacing);
 		lineWidth = (EditText) findViewById(R.id.width);
-		multiplier.setText("5");
+		multiplier.setText("3");
 		spacing.setText("256");
 		lineWidth.setText("2");
 	}

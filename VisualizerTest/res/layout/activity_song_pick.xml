@@ -14,36 +14,60 @@
         android1:text="@string/song" />
 
     <EditText
-        android1:id="@+id/multiplier"
+        android1:id="@+id/spacing"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
-        android1:layout_alignParentLeft="true"
-        android1:layout_below="@+id/button1"
-        android:hint="Multiplier"
+        android1:layout_below="@+id/multiplier"
+        android1:layout_toRightOf="@+id/button1"
         android1:ems="10"
+        android1:hint="@string/barnum"
         android1:inputType="number" >
 
         <requestFocus />
     </EditText>
 
     <EditText
-        android1:id="@+id/spacing"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_alignParentLeft="true"
-        android1:layout_below="@+id/multiplier"
-        android:hint="Amount of Bars"
-        android1:ems="10"
-        android1:inputType="number" />
-
-    <EditText
         android1:id="@+id/width"
         android1:layout_width="wrap_content"
         android1:layout_height="wrap_content"
-        android1:layout_alignParentLeft="true"
         android1:layout_below="@+id/spacing"
-        android:hint="Bar Width"
+        android1:layout_toRightOf="@+id/button1"
         android1:ems="10"
+        android1:hint="@string/barwidth"
         android1:inputType="number" />
+
+    <EditText
+        android1:id="@+id/multiplier"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignLeft="@+id/spacing"
+        android1:layout_below="@+id/button1"
+        android1:ems="10"
+        android1:hint="@string/multiplier"
+        android1:inputType="number" />
+
+    <TextView
+        android1:id="@+id/textView2"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignTop="@+id/spacing"
+        android1:layout_toLeftOf="@+id/spacing"
+        android1:text="@string/barnum" />
+
+    <TextView
+        android1:id="@+id/textView1"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_alignTop="@+id/multiplier"
+        android1:text="@string/multiplier" />
+
+    <TextView
+        android1:id="@+id/textView3"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_alignTop="@+id/width"
+        android1:text="@string/barwidth" />
 
 </RelativeLayout>
