@@ -70,4 +70,13 @@
         android1:hint="@string/barwidth"
         android1:inputType="number" />
 
+    <Button
+        android1:id="@+id/button2"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_below="@+id/textView3"
+        android1:text="Play SoundCloud Song" 
+        android:onClick="startSCActivity"/>
+
 </RelativeLayout>

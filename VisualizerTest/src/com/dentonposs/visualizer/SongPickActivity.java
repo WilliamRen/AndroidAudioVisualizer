@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SongPickActivity extends Activity {
     public static Uri songURI;
@@ -24,6 +25,7 @@ public class SongPickActivity extends Activity {
     public void onActivityResult(int paramInt1, int paramInt2, Intent paramIntent) {
 	if (paramInt2 == Activity.RESULT_OK) {
 	    songURI = paramIntent.getData();
+	    Toast.makeText(getBaseContext(), songURI.toString(), Toast.LENGTH_LONG).show();
 	    startActivity(new Intent(this, MainActivity.class));
 	}
     }
@@ -33,7 +35,7 @@ public class SongPickActivity extends Activity {
     protected void onCreate(Bundle paramBundle) {
 	super.onCreate(paramBundle);
 	setContentView(R.layout.activity_song_pick);
-	
+
 	Display localDisplay = ((WindowManager) getBaseContext().getSystemService("window")).getDefaultDisplay();
 	if (android.os.Build.VERSION.SDK_INT < 13) {
 	    width = localDisplay.getWidth();
@@ -44,12 +46,12 @@ public class SongPickActivity extends Activity {
 	    width = size.x;
 	    height = size.y;
 	}
-	
+
 	TextView barnumtv = (TextView) findViewById(R.id.textView2);
-	barnumtv.setText(barnumtv.getText().toString() + width);
+	barnumtv.setText(barnumtv.getText().toString() + " " + width);
 	multiplier = (EditText) findViewById(R.id.multiplier);
 	spacing = (EditText) findViewById(R.id.spacing);
-	spacing.setFilters(new InputFilter[]{new InputFilterMinMax(1, width - 1)});
+	spacing.setFilters(new InputFilter[] { new InputFilterMinMax(1, width) });
 	lineWidth = (EditText) findViewById(R.id.width);
 	multiplier.setText("3");
 	spacing.setText("256");
@@ -65,5 +67,9 @@ public class SongPickActivity extends Activity {
 	Intent localIntent = new Intent("android.intent.action.GET_CONTENT");
 	localIntent.setType("audio/*");
 	startActivityForResult(Intent.createChooser(localIntent, "Select soundfile"), 1);
+    }
+    
+    public void startSCActivity(View v){
+	startActivity(new Intent(getBaseContext(), SoundCloud.class));
     }
 }

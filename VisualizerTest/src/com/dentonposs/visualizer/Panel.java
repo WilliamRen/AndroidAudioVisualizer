@@ -1,5 +1,6 @@
 package com.dentonposs.visualizer;
 
+import java.nio.ByteBuffer;
 import java.util.Random;
 
 import android.annotation.SuppressLint;
@@ -28,7 +29,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
     int multiplier_i;
     int spacing_i;
     int lineWidth_i;
-    
+
     float spacing_px;
 
     public Panel(Context paramContext) {
@@ -80,12 +81,17 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void onDraw(Canvas paramCanvas) {
 	paramCanvas.drawColor(-16777216);
+
 	this.vis.getFft(this.waveDataByte);
 	for (int i = 0; i < waveDataByte.length; i++) {
 	    paramCanvas.drawLine(i * spacing_px, height / 2, i * (width / spacing_i), (this.height / 2) - Math.abs(multiplier_i * this.waveDataByte[i]), this.paint);
 	    paramCanvas.drawLine(i * spacing_px, height / 2, i * (width / spacing_i), (this.height / 2) + Math.abs(multiplier_i * this.waveDataByte[i]), this.paint);
 	}
 
+    }
+
+    public static double toDouble(byte[] bytes) {
+	return ByteBuffer.wrap(bytes).getDouble();
     }
 
     public static void pauseSong() {
@@ -108,7 +114,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceDestroyed(SurfaceHolder paramSurfaceHolder) {
 	int i = 1;
 	this.canvasthread.setRunning(false);
-	player.stop();
+	deinit();
 	while (true) {
 	    if (i == 0)
 		return;
@@ -118,5 +124,10 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	    } catch (InterruptedException localInterruptedException) {
 	    }
 	}
+    }
+
+    private void deinit() {
+	//player.release();
+	vis.setEnabled(false);
     }
 }
